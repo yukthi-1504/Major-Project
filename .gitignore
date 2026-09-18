@@ -3,8 +3,8 @@ __pycache__/
 *.pyc
 .vscode/
 
-# Ecolab network artifacts (Zscaler TLS inspection) - not needed outside that network
-zscaler-root-ca.crt
+# Ecolab network artifact - Dockerfile needs this to build behind Zscaler; harmless
+# no-op elsewhere (public CA cert, not a secret), so it stays committed.
 combined-ca-bundle.pem
 
 .DS_Store
