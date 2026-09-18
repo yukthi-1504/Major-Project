@@ -10,18 +10,19 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #0d1117;
-      --surface:   #161b22;
-      --border:    #30363d;
-      --accent:    #58a6ff;
-      --accent2:   #79c0ff;
+      --bg:        #0b0e14;
+      --surface:   #12161f;
+      --surface2:  #171c27;
+      --border:    #262c38;
+      --accent:    #4c8dff;
+      --accent2:   #7db1ff;
       --green:     #3fb950;
       --yellow:    #d29922;
       --orange:    #f0883e;
       --red:       #f85149;
       --text:      #e6edf3;
       --muted:     #7d8590;
-      --radius:    14px;
+      --radius:    12px;
     }
 
     body {
@@ -29,85 +30,166 @@
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
-      padding: 32px 16px;
     }
 
-    /* ── Header ── */
-    header {
-      text-align: center;
-      margin-bottom: 40px;
+    /* ── Top bar ── */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 32px;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+      gap: 12px;
     }
-    header .badge {
-      display: inline-block;
-      background: rgba(88,166,255,.15);
-      border: 1px solid rgba(88,166,255,.35);
-      color: var(--accent2);
-      font-size: 12px;
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-mark {
+      width: 28px; height: 28px;
+      border-radius: 7px;
+      background: linear-gradient(135deg, var(--accent), #a371f7);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 13px; color: white;
+      flex-shrink: 0;
+    }
+    .topbar-title {
       font-weight: 600;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      padding: 4px 14px;
-      border-radius: 99px;
-      margin-bottom: 14px;
-    }
-    header h1 {
-      font-size: clamp(22px, 4vw, 36px);
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      background: linear-gradient(135deg, #79c0ff 0%, #58a6ff 50%, #a371f7 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    header p {
-      color: var(--muted);
       font-size: 14px;
-      margin-top: 8px;
+      letter-spacing: -.2px;
+    }
+    .topbar-title .sub {
+      display: block;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: .3px;
+    }
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-size: 13px;
+    }
+    .live-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(63,185,80,.12);
+      border: 1px solid rgba(63,185,80,.3);
+      color: var(--green);
+      font-weight: 600;
+      font-size: 12px;
+      padding: 5px 12px;
+      border-radius: 99px;
+    }
+    .live-led {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 6px rgba(63,185,80,.8);
+      animation: pulse 2s infinite;
+    }
+    .topbar-right a {
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px dotted transparent;
+    }
+    .topbar-right a:hover { color: var(--accent2); border-color: var(--accent2); }
+
+    /* ── Page intro ── */
+    .page-intro {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 28px 32px 8px;
+    }
+    .page-intro h1 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -.3px;
+    }
+    .page-intro p {
+      color: var(--muted);
+      font-size: 13.5px;
+      margin-top: 4px;
     }
 
     /* ── Layout ── */
     .wrapper {
-      max-width: 960px;
+      max-width: 1040px;
       margin: 0 auto;
+      padding: 20px 32px 40px;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 24px;
+      gap: 20px;
     }
-    @media (max-width: 700px) { .wrapper { grid-template-columns: 1fr; } }
+    @media (max-width: 760px) { .wrapper { grid-template-columns: 1fr; } .topbar { padding: 14px 20px; } .page-intro { padding: 24px 20px 8px; } }
 
     /* ── Card ── */
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 28px;
+      padding: 24px;
     }
     .card h2 {
-      font-size: 14px;
+      font-size: 12.5px;
       font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: .8px;
       color: var(--muted);
-      margin-bottom: 22px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      margin-bottom: 20px;
     }
-    .card h2 .icon { font-size: 16px; }
+
+    /* ── Data source switch ── */
+    .source-switch {
+      display: flex;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 3px;
+      margin-bottom: 20px;
+    }
+    .source-switch button {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      font-family: inherit;
+      font-size: 12.5px;
+      font-weight: 600;
+      padding: 9px 10px;
+      border-radius: 7px;
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .source-switch button.active {
+      background: var(--surface2);
+      color: var(--text);
+      box-shadow: 0 0 0 1px var(--border);
+    }
+    .source-note {
+      font-size: 12px;
+      color: var(--muted);
+      margin: -12px 0 20px;
+      line-height: 1.5;
+    }
 
     /* ── Form ── */
-    .form-group { margin-bottom: 18px; }
+    .form-group { margin-bottom: 16px; }
     label {
       display: block;
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 500;
       color: var(--muted);
       margin-bottom: 6px;
-      letter-spacing: 0.5px;
+      letter-spacing: .3px;
     }
     input[type="datetime-local"],
-    input[type="number"],
-    select {
+    input[type="number"] {
       width: 100%;
       background: var(--bg);
       border: 1px solid var(--border);
@@ -119,7 +201,7 @@
       transition: border-color .2s;
       outline: none;
     }
-    input:focus, select:focus { border-color: var(--accent); }
+    input:focus { border-color: var(--accent); }
 
     .toggle-row {
       display: flex;
@@ -128,8 +210,9 @@
     }
     .toggle {
       position: relative;
-      width: 44px;
-      height: 24px;
+      width: 40px;
+      height: 22px;
+      flex-shrink: 0;
     }
     .toggle input { opacity: 0; width: 0; height: 0; }
     .slider {
@@ -137,50 +220,62 @@
       background: var(--border);
       border-radius: 99px;
       cursor: pointer;
-      transition: .3s;
+      transition: .2s;
     }
     .slider::before {
       content: '';
       position: absolute;
-      height: 18px; width: 18px;
+      height: 16px; width: 16px;
       left: 3px; top: 3px;
       background: white;
       border-radius: 50%;
-      transition: .3s;
+      transition: .2s;
     }
     input:checked + .slider { background: var(--accent); }
-    input:checked + .slider::before { transform: translateX(20px); }
+    input:checked + .slider::before { transform: translateX(18px); }
+
+    #synthetic-fields { display: none; }
 
     /* ── Button ── */
     .btn {
       width: 100%;
-      padding: 13px;
-      background: linear-gradient(135deg, #1f6feb, #388bfd);
+      padding: 12px;
+      background: var(--accent);
       border: none;
       border-radius: 8px;
       color: white;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 600;
       font-family: inherit;
       cursor: pointer;
-      margin-top: 8px;
-      transition: opacity .2s, transform .1s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
+      margin-top: 6px;
+      transition: filter .15s, transform .1s;
     }
-    .btn:hover { opacity: .9; }
+    .btn:hover { filter: brightness(1.1); }
     .btn:active { transform: scale(.98); }
     .btn:disabled { opacity: .5; cursor: not-allowed; }
 
     /* ── Result panel ── */
     #result-panel { display: none; }
 
+    .model-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 99px;
+      margin-bottom: 16px;
+    }
+
     .result-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 16px;
+      gap: 14px;
       margin-bottom: 20px;
     }
 
@@ -188,50 +283,48 @@
       background: var(--bg);
       border: 1px solid var(--border);
       border-radius: 10px;
-      padding: 20px;
+      padding: 18px;
       text-align: center;
     }
     .metric-card .label {
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: .8px;
       color: var(--muted);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
     .metric-card .value {
-      font-size: 42px;
+      font-size: 38px;
       font-weight: 700;
-      letter-spacing: -2px;
+      letter-spacing: -1.5px;
       line-height: 1;
     }
     .metric-card .unit {
-      font-size: 13px;
+      font-size: 12px;
       color: var(--muted);
       margin-top: 4px;
     }
 
-    /* Replica light indicators */
     .replica-dots {
       display: flex;
       justify-content: center;
-      gap: 8px;
-      margin-top: 14px;
+      gap: 7px;
+      margin-top: 12px;
     }
     .dot {
-      width: 28px; height: 28px;
+      width: 24px; height: 24px;
       border-radius: 50%;
       border: 2px solid var(--border);
       background: var(--border);
-      transition: all .4s ease;
+      transition: all .3s ease;
     }
     .dot.active {
       border-color: var(--green);
       background: var(--green);
-      box-shadow: 0 0 12px rgba(63,185,80,.5);
+      box-shadow: 0 0 10px rgba(63,185,80,.5);
     }
 
-    /* Status badge */
     .status-badge {
       display: inline-flex;
       align-items: center;
@@ -247,53 +340,51 @@
     .status-badge.high   { background: rgba(240,136,62,.15); color: var(--orange); border: 1px solid rgba(240,136,62,.3); }
     .status-badge.peak   { background: rgba(248,81,73,.15);  color: var(--red);    border: 1px solid rgba(248,81,73,.3); }
 
-    /* ── Scaling table ── */
     .scale-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 13px;
+      font-size: 12.5px;
     }
     .scale-table th {
       text-align: left;
-      padding: 8px 12px;
+      padding: 8px 10px;
       border-bottom: 1px solid var(--border);
       color: var(--muted);
       font-weight: 600;
-      font-size: 11px;
+      font-size: 10.5px;
       text-transform: uppercase;
-      letter-spacing: 0.8px;
+      letter-spacing: .6px;
     }
     .scale-table td {
-      padding: 10px 12px;
-      border-bottom: 1px solid rgba(48,54,61,.5);
+      padding: 9px 10px;
+      border-bottom: 1px solid rgba(38,44,56,.6);
     }
-    .scale-table tr.active-row td { background: rgba(88,166,255,.08); }
+    .scale-table tr.active-row td { background: rgba(76,141,255,.08); }
     .scale-table tr.active-row td:first-child {
       border-left: 3px solid var(--accent);
     }
 
-    /* ── Error ── */
     .error-box {
       background: rgba(248,81,73,.1);
       border: 1px solid rgba(248,81,73,.3);
       border-radius: 8px;
-      padding: 14px;
-      font-size: 13px;
+      padding: 13px;
+      font-size: 12.5px;
       color: var(--red);
       display: none;
+      margin-bottom: 14px;
     }
 
-    /* ── API indicator ── */
     .api-status {
       display: flex;
       align-items: center;
       gap: 8px;
       font-size: 12px;
       color: var(--muted);
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
     .api-dot {
-      width: 8px; height: 8px;
+      width: 7px; height: 7px;
       border-radius: 50%;
       background: var(--yellow);
       animation: pulse 2s infinite;
@@ -302,79 +393,107 @@
     .api-dot.offline { background: var(--red);   animation: none; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
 
-    /* ── Footer ── */
     footer {
       text-align: center;
-      margin-top: 48px;
+      padding: 24px 20px 32px;
       color: var(--muted);
       font-size: 12px;
+      border-top: 1px solid var(--border);
+      margin-top: 8px;
     }
-    footer span { color: var(--accent); }
+    footer a { color: var(--accent2); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
 
-<header>
-  <div class="badge">⚡ Reva University — Major Project</div>
-  <h1>Flash Sale Predictive Autoscaling</h1>
-  <p>ML-powered Kubernetes scaling dashboard — Random Forest Regressor</p>
-</header>
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="logo-mark">FS</div>
+    <div class="topbar-title">
+      Flash Sale Predictive Autoscaling
+      <span class="sub">Reva University — Major Project</span>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <span class="live-pill"><span class="live-led"></span>Live production API</span>
+    <a href="https://major-project-clj7.onrender.com/health" target="_blank" rel="noopener">API health ↗</a>
+    <a href="https://github.com/yukthi-1504/Major-Project" target="_blank" rel="noopener">Source ↗</a>
+  </div>
+</div>
+
+<div class="page-intro">
+  <h1>Predict traffic. Scale before it hits.</h1>
+  <p>A Random Forest model forecasts next-hour e-commerce traffic and recommends a Kubernetes replica count — proactive autoscaling instead of reactive.</p>
+</div>
 
 <div class="wrapper">
 
   <!-- ── INPUT CARD ── -->
   <div class="card">
-    <h2><span class="icon">🎛️</span> Flash Sale Parameters</h2>
+    <h2>Prediction Input</h2>
 
     <div class="api-status">
       <div class="api-dot" id="api-dot"></div>
       <span id="api-label">Checking API…</span>
     </div>
 
+    <div class="source-switch">
+      <button type="button" id="btn-real" class="active" onclick="setMode('real')">Real data (production)</button>
+      <button type="button" id="btn-synthetic" onclick="setMode('synthetic')">Synthetic demo (campaign-aware)</button>
+    </div>
+    <div class="source-note" id="source-note">
+      Trained on real Olist e-commerce order data. No promotional/campaign signal exists in this
+      data, so this model can't demonstrate a campaign effect — see the synthetic demo for that.
+    </div>
+
     <div class="form-group">
-      <label>DATE & TIME OF FLASH SALE</label>
+      <label>DATE &amp; TIME OF FLASH SALE</label>
       <input type="datetime-local" id="current_time" />
     </div>
 
     <div class="form-group">
       <label>CURRENT TRAFFIC (requests/hour)</label>
-      <input type="number" id="last_traffic" placeholder="e.g. 75" min="0" max="1000" value="75" />
+      <input type="number" id="last_traffic" placeholder="e.g. 40" min="0" max="1000" value="40" />
     </div>
 
-    <div class="form-group">
-      <div class="toggle-row">
-        <label style="margin:0">FLASH SALE CAMPAIGN ACTIVE</label>
-        <label class="toggle">
-          <input type="checkbox" id="campaign" checked />
-          <span class="slider"></span>
-        </label>
+    <div id="synthetic-fields">
+      <div class="form-group">
+        <div class="toggle-row">
+          <label style="margin:0">FLASH SALE CAMPAIGN ACTIVE</label>
+          <label class="toggle">
+            <input type="checkbox" id="campaign" checked />
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>DISCOUNT PERCENTAGE (%)</label>
+        <input type="number" id="discount" placeholder="e.g. 20" min="0" max="100" value="20" />
       </div>
     </div>
 
-    <div class="form-group">
-      <label>DISCOUNT PERCENTAGE (%)</label>
-      <input type="number" id="discount" placeholder="e.g. 20" min="0" max="100" value="20" />
-    </div>
-
-    <div class="error-box" id="error-box">⚠️ <span id="error-msg"></span></div>
+    <div class="error-box" id="error-box"><span id="error-msg"></span></div>
 
     <button class="btn" id="predict-btn" onclick="runPrediction()">
-      <span>⚡</span> Predict & Scale
+      Predict &amp; Scale
     </button>
   </div>
 
   <!-- ── RESULT CARD ── -->
   <div class="card" id="result-panel">
-    <h2><span class="icon">📊</span> Autoscaling Decision</h2>
+    <h2>Autoscaling Decision</h2>
 
-    <div style="text-align:center; margin-bottom: 4px;">
-      <span class="status-badge" id="status-badge">●</span>
+    <div style="text-align:center;">
+      <div class="model-tag" id="model-tag"></div>
+      <br>
+      <span class="status-badge" id="status-badge"></span>
     </div>
 
     <div class="result-grid">
       <div class="metric-card">
         <div class="label">Predicted Traffic</div>
-        <div class="value" id="traffic-val" style="color: var(--accent);">—</div>
+        <div class="value" id="traffic-val" style="color: var(--accent2);">—</div>
         <div class="unit">requests / hour</div>
       </div>
       <div class="metric-card">
@@ -391,37 +510,75 @@
       </div>
     </div>
 
-    <!-- Scaling reference table -->
-    <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:1px; color:var(--muted); margin-bottom:10px;">Scaling Rules</div>
-    <table class="scale-table">
+    <div style="font-size:10.5px; font-weight:600; text-transform:uppercase; letter-spacing:.8px; color:var(--muted); margin-bottom:10px;">Scaling Rules — <span id="scale-table-mode">real data</span></div>
+    <table class="scale-table" id="scale-table">
       <thead>
         <tr><th>Traffic Range</th><th>Replicas</th><th>Load Level</th></tr>
       </thead>
-      <tbody>
-        <tr id="row-1"><td>1 – 50</td><td>1 pod</td><td>🟢 Low</td></tr>
-        <tr id="row-2"><td>51 – 100</td><td>2 pods</td><td>🟡 Moderate</td></tr>
-        <tr id="row-3"><td>101 – 200</td><td>3 pods</td><td>🟠 High</td></tr>
-        <tr id="row-4"><td>201 – 300</td><td>4 pods</td><td>🔴 Very High</td></tr>
-        <tr id="row-5"><td>300+</td><td>5 pods</td><td>🚨 Peak</td></tr>
-      </tbody>
+      <tbody id="scale-table-body"></tbody>
     </table>
   </div>
 
 </div>
 
 <footer>
-  <p>Flash Sale Autoscaling System &nbsp;|&nbsp; <span>Reva University Major Project</span> &nbsp;|&nbsp; Random Forest · Flask · Kubernetes</p>
+  Flash Sale Autoscaling System &nbsp;·&nbsp; Random Forest · Flask · Docker · Kubernetes &nbsp;·&nbsp;
+  <a href="https://github.com/yukthi-1504/Major-Project" target="_blank" rel="noopener">GitHub</a>
 </footer>
 
 <script>
   const API_BASE = 'https://major-project-clj7.onrender.com';
+
+  const SCALE_TABLES = {
+    real: [
+      { range: '0 – 10',  replicas: 1, level: 'Low' },
+      { range: '11 – 25', replicas: 2, level: 'Moderate' },
+      { range: '26 – 50', replicas: 3, level: 'Elevated' },
+      { range: '51 – 80', replicas: 4, level: 'High' },
+      { range: '81+',     replicas: 5, level: 'Peak' },
+    ],
+    synthetic: [
+      { range: '0 – 50',    replicas: 1, level: 'Low' },
+      { range: '51 – 100',  replicas: 2, level: 'Moderate' },
+      { range: '101 – 200', replicas: 3, level: 'Elevated' },
+      { range: '201 – 300', replicas: 4, level: 'High' },
+      { range: '301+',      replicas: 5, level: 'Peak' },
+    ],
+  };
+
+  const SOURCE_NOTES = {
+    real: `Trained on real Olist e-commerce order data. No promotional/campaign signal exists in
+           this data, so this model can't demonstrate a campaign effect — see the synthetic demo for that.`,
+    synthetic: `Trained on simulated flash-sale data with a built-in campaign/discount effect —
+                built specifically to demonstrate campaign-aware scaling, since real order data has no such field.`,
+  };
+
+  let currentMode = 'real';
+
+  function renderScaleTable(mode) {
+    const tbody = document.getElementById('scale-table-body');
+    tbody.innerHTML = SCALE_TABLES[mode].map((row, i) =>
+      `<tr id="row-${i+1}"><td>${row.range}</td><td>${row.replicas} pod${row.replicas > 1 ? 's' : ''}</td><td>${row.level}</td></tr>`
+    ).join('');
+    document.getElementById('scale-table-mode').textContent = mode === 'real' ? 'real data' : 'synthetic demo';
+  }
+  renderScaleTable('real');
+
+  function setMode(mode) {
+    currentMode = mode;
+    document.getElementById('btn-real').classList.toggle('active', mode === 'real');
+    document.getElementById('btn-synthetic').classList.toggle('active', mode === 'synthetic');
+    document.getElementById('synthetic-fields').style.display = mode === 'synthetic' ? 'block' : 'none';
+    document.getElementById('source-note').textContent = SOURCE_NOTES[mode];
+    renderScaleTable(mode);
+    document.getElementById('result-panel').style.display = 'none';
+  }
 
   // Set default datetime to now
   const now = new Date();
   now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
   document.getElementById('current_time').value = now.toISOString().slice(0,16);
 
-  // Check API health on load
   async function checkHealth() {
     const dot   = document.getElementById('api-dot');
     const label = document.getElementById('api-label');
@@ -430,14 +587,14 @@
       const data = await res.json();
       if (data.model_loaded) {
         dot.className   = 'api-dot online';
-        label.textContent = 'API online · Model loaded';
+        label.textContent = 'API online · both models loaded';
       } else {
         dot.className   = 'api-dot offline';
         label.textContent = 'API online but model not loaded';
       }
     } catch {
       dot.className   = 'api-dot offline';
-      label.textContent = 'API offline — start with: python api/app.py';
+      label.textContent = 'API unreachable — free tier may be waking from idle, retry in ~30s';
     }
   }
   checkHealth();
@@ -448,29 +605,31 @@
     const errMsg  = document.getElementById('error-msg');
     errBox.style.display = 'none';
 
-    // Collect inputs
     const ctRaw   = document.getElementById('current_time').value;
     const traffic = parseFloat(document.getElementById('last_traffic').value);
-    const campaign = document.getElementById('campaign').checked ? 1 : 0;
-    const discount = parseFloat(document.getElementById('discount').value);
 
-    if (!ctRaw || isNaN(traffic) || isNaN(discount)) {
+    if (!ctRaw || isNaN(traffic)) {
       errMsg.textContent = 'Please fill in all fields correctly.';
       errBox.style.display = 'block';
       return;
     }
 
-    // Format datetime for Flask: "YYYY-MM-DD HH:MM:SS"
     const current_time = ctRaw.replace('T', ' ') + ':00';
+    const payload = { current_time, last_traffic: traffic, mode: currentMode };
+
+    if (currentMode === 'synthetic') {
+      payload.campaign = document.getElementById('campaign').checked ? 1 : 0;
+      payload.discount = parseFloat(document.getElementById('discount').value) || 0;
+    }
 
     btn.disabled = true;
-    btn.innerHTML = '<span>⏳</span> Predicting…';
+    btn.textContent = 'Predicting…';
 
     try {
       const res = await fetch(`${API_BASE}/predict`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ current_time, last_traffic: traffic, campaign, discount })
+        body: JSON.stringify(payload)
       });
 
       if (!res.ok) throw new Error(`API error ${res.status}`);
@@ -478,11 +637,11 @@
       displayResult(data);
 
     } catch (err) {
-      errMsg.textContent = `Could not reach API. Make sure Flask is running on port 5000. (${err.message})`;
+      errMsg.textContent = `Could not reach the live API (${err.message}). If it's been idle a while, it may be waking up — try again in ~30s.`;
       errBox.style.display = 'block';
     } finally {
       btn.disabled = false;
-      btn.innerHTML = '<span>⚡</span> Predict & Scale';
+      btn.textContent = 'Predict & Scale';
     }
   }
 
@@ -491,41 +650,42 @@
     const trafficEl = document.getElementById('traffic-val');
     const replicaEl = document.getElementById('replica-val');
     const badge     = document.getElementById('status-badge');
+    const modelTag  = document.getElementById('model-tag');
     panel.style.display = 'block';
 
     const t = data.predicted_traffic;
     const r = data.recommended_replicas;
 
-    // Animate number
+    modelTag.textContent = data.model === 'synthetic'
+      ? 'Model: Synthetic (campaign-aware demo)'
+      : 'Model: Real (Olist order data)';
+
     animateNumber(trafficEl, t);
     animateNumber(replicaEl, r);
 
-    // Light up dots
     for (let i = 1; i <= 5; i++) {
       const dot = document.getElementById(`d${i}`);
       dot.className = i <= r ? 'dot active' : 'dot';
     }
 
-    // Highlight table row
     for (let i = 1; i <= 5; i++) {
       document.getElementById(`row-${i}`).classList.remove('active-row');
     }
     document.getElementById(`row-${r}`).classList.add('active-row');
 
-    // Status badge
     const configs = {
-      1: { cls:'low',  label:'🟢 Low Load',   color:'var(--green)'  },
-      2: { cls:'mid',  label:'🟡 Moderate',   color:'var(--yellow)' },
-      3: { cls:'high', label:'🟠 High Load',  color:'var(--orange)' },
-      4: { cls:'peak', label:'🔴 Very High',  color:'var(--red)'    },
-      5: { cls:'peak', label:'🚨 Peak Load',  color:'var(--red)'    },
+      1: { cls:'low',  label:'Low load',      color:'var(--green)'  },
+      2: { cls:'mid',  label:'Moderate load', color:'var(--yellow)' },
+      3: { cls:'high', label:'Elevated load', color:'var(--orange)' },
+      4: { cls:'peak', label:'High load',     color:'var(--red)'    },
+      5: { cls:'peak', label:'Peak load',     color:'var(--red)'    },
     };
     const cfg = configs[r] || configs[1];
     badge.className = `status-badge ${cfg.cls}`;
     badge.textContent = cfg.label;
     replicaEl.style.color = cfg.color;
 
-    checkHealth(); // refresh API dot
+    checkHealth();
   }
 
   function animateNumber(el, target) {

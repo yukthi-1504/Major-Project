@@ -20,7 +20,13 @@ DATASETS = {
 }
 DATASET_CHOICE = os.environ.get("DATASET", "olist")
 DATA_PATH = BASE_DIR.parent / "data" / "raw" / DATASETS[DATASET_CHOICE]
-MODEL_PATH = BASE_DIR / "traffic_predictor.pkl"
+# The API serves both models side by side (real-data default + synthetic
+# campaign-aware demo), so each dataset needs its own model file.
+MODEL_FILENAMES = {
+    "olist": "traffic_predictor.pkl",
+    "synthetic": "traffic_predictor_synthetic.pkl",
+}
+MODEL_PATH = BASE_DIR / MODEL_FILENAMES[DATASET_CHOICE]
 
 # Figures are always saved to disk (per-dataset folder) so they exist
 # regardless of terminal/backend quirks with interactive plt.show() windows.
@@ -89,8 +95,12 @@ df['rolling_std_3'] = df['traffic'].rolling(3, min_periods=1).std().fillna(0)
 df = pd.get_dummies(df, columns=['day_of_week'], prefix='day')
 
 # --- STEP 5: Prepare Features & Target ---
+# campaign/discount only exist in the synthetic dataset (real Olist orders have
+# no promo signal) - include them when present so the synthetic model can
+# actually learn the campaign effect, instead of silently ignoring it.
 FEATURES = ['hour', 'past_traffic',
             'lag_1', 'lag_2', 'lag_3', 'rolling_mean_3', 'rolling_std_3'] + \
+           [col for col in ('campaign', 'discount') if col in df.columns] + \
            [col for col in df.columns if col.startswith('day_')]
 
 TARGET = 'traffic'
