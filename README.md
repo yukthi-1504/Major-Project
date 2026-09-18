@@ -150,16 +150,19 @@ kubectl port-forward svc/flashsale-app-service 8080:80
 aggregated into hourly traffic counts, with lag (1-3 hour) and rolling-average features plus
 one-hot encoded day-of-week.
 
-Evaluated on a held-out 20% split:
+Evaluated on the chronologically last 20% of hours (a time-based split, not a random one —
+random would leak future hours into training and make the model look better than it actually
+is at forecasting):
 
 | Metric | Model | Mean-predictor baseline | Improvement |
 |---|---|---|---|
 | MAE | 0.72 | 6 | 89% |
 | RMSE | 1.85 | 8 | 77% |
 
-Known limitation, not yet fixed: `train_model.py` currently splits train/test randomly rather
-than by time, which risks the model "seeing the future" during evaluation on this time-series
-data. A proper fix would use a chronological split.
+A second model is also trained on the synthetic dataset, with a genuine campaign/discount
+effect (dropped for the real model, since real Olist orders have no promo signal). The live
+API serves both — pass `"mode": "synthetic"` to `/predict` to use it. The dashboard's
+"Synthetic demo" toggle does exactly this.
 
 ---
 
@@ -179,7 +182,8 @@ data. A proper fix would use a chronological split.
 - [x] Containerized API
 - [x] Kubernetes HPA proven to scale live, both CPU- and memory-triggered
 - [x] Public live deployment (Render)
-- [ ] Time-based (not random) train/test split
+- [x] Time-based train/test split (no data leakage)
+- [x] Dual real/synthetic models with an honest campaign-effect demo
 - [ ] Point the Kubernetes deployment at a real public cluster, not just local Minikube
 
 ---
