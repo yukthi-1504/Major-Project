@@ -1,0 +1,66 @@
+# Kubernetes deployment + service for the flash-sale prediction API.
+#
+# Build the image first (from the repo root, where Dockerfile lives):
+#   docker build -t flashsale-app:latest .
+# If using Minikube, load it into the cluster's own image cache instead of a registry:
+#   minikube image load flashsale-app:latest
+#
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flashsale-app
+  labels:
+    app: flashsale-app
+    project: major-project-reva
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flashsale-app
+  template:
+    metadata:
+      labels:
+        app: flashsale-app
+    spec:
+      containers:
+        - name: flashsale-app
+          image: flashsale-app:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5000
+          # Requests are required for the HPA's CPU/memory percentage targets
+          # (hpa.yaml) to mean anything - percentages are relative to these.
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "384Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 10
+            periodSeconds: 20
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flashsale-app-service
+  labels:
+    app: flashsale-app
+spec:
+  selector:
+    app: flashsale-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
+  type: LoadBalancer

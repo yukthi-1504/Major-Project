@@ -1,0 +1,21 @@
+# Flash Sale Predictive Autoscaling - Python Dependencies
+# Install with: pip install -r requirements.txt
+
+# --- Core ML ---
+scikit-learn==1.4.2
+numpy==1.26.4
+pandas==2.2.2
+joblib==1.4.2
+
+# --- Visualisation (used in train_model.py) ---
+matplotlib==3.9.0
+seaborn==0.13.2
+
+# --- REST API ---
+flask==3.0.3
+flask-cors==6.0.2
+gunicorn==22.0.0
+
+# --- Kubernetes client (optional - for live cluster patching) ---
+# Uncomment the line below if you have a real Kubernetes cluster to connect to
+# kubernetes==30.1.0

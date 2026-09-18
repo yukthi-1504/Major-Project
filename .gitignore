@@ -1,0 +1,11 @@
+venv/
+__pycache__/
+*.pyc
+.vscode/
+
+# Ecolab network artifacts (Zscaler TLS inspection) - not needed outside that network
+zscaler-root-ca.crt
+combined-ca-bundle.pem
+
+.DS_Store
+.claude/settings.local.json

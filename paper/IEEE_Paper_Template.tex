@@ -1,0 +1,146 @@
+% IEEE Two-Column Conference/Transaction Paper Template
+% Use this template and write ALL body text in your own words.
+% See AUTHOR_GUIDE.md for section-by-section writing prompts.
+%
+% CONFERENCE: Not yet decided. Finish the paper content first. When you choose
+% a conference, add its details using the placeholder below (see COMMENTED block).
+
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue}
+
+\begin{document}
+
+\title{Predictive Autoscaling for E-Commerce Flash Sales Using Machine Learning and Kubernetes\\
+%\thanks{To appear in: [Conference Full Name], [City, Country], [Month Day--Day, Year].}
+}
+
+% When conference is decided, uncomment the \thanks line above and fill in:
+% [Conference Full Name]  e.g. "2026 IEEE International Conference on..."
+% [City, Country]         e.g. "Bangalore, India"
+% [Month Day--Day, Year]  e.g. "March 15--17, 2026"
+
+\author{\IEEEauthorblockN{Your Name}
+\IEEEauthorblockA{Department of Computer Science and Engineering\\
+REVA University\\
+Bangalore, India\\
+your.email@reva.edu.in}
+}
+
+\maketitle
+
+\begin{abstract}
+% Write 80-150 words in your own words covering:
+% (1) Problem: flash sales cause traffic spikes; reactive scaling is too slow.
+% (2) Approach: predict traffic ~1 hour ahead with ML; scale K8s before the spike.
+% (3) Method: Random Forest on synthetic hourly data; REST API + HPA.
+% (4) Result: proactive scaling, reduced timeouts; MAE/RMSE from your training run.
+% Do NOT copy from README; paraphrase and use your own sentences.
+Replace this paragraph with your own abstract.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Autoscaling, e-commerce, flash sale, traffic prediction, machine learning, Random Forest, Kubernetes, horizontal pod autoscaler, REST API.
+\end{IEEEkeywords}
+
+%==============================================================================
+\section{Introduction}
+\label{sec:intro}
+% Write 3-4 short paragraphs in your own words:
+% - Why flash sales matter in e-commerce and how they cause sudden traffic spikes.
+% - Drawbacks of reactive autoscaling (delay, timeouts, lost revenue).
+% - Goal: proactive scaling by predicting traffic in advance.
+% - Brief outline of what the paper presents (data, model, API, K8s, results).
+Replace this with your introduction paragraphs.
+%==============================================================================
+
+%==============================================================================
+\section{Related Work}
+\label{sec:related}
+% Write 2-3 paragraphs. Cite at least 3-5 papers or official docs (IEEE style [1], [2]).
+% Topics: cloud autoscaling (reactive vs predictive), traffic forecasting, ML for resource management, Kubernetes HPA.
+% Use your own sentences; do not copy from abstracts.
+Replace this with your related work.
+%==============================================================================
+
+%==============================================================================
+\section{System Architecture}
+\label{sec:architecture}
+% Describe the pipeline: Event -> REST API -> ML model -> scaling logic -> K8s HPA -> deployment.
+% You may include one figure (architecture diagram from README, redraw in your own style if needed).
+% Use your own wording.
+Replace this with your architecture description.
+%==============================================================================
+
+%==============================================================================
+\section{Data}
+\label{sec:data}
+% Describe: synthetic dataset (722 rows, 30 days hourly), schema (timestamp, hour, day_of_week, campaign, discount, past_traffic, traffic).
+% Justify use of synthetic data (privacy, reproducibility). Mention generator script and validation.
+Replace this with your data section.
+%==============================================================================
+
+%==============================================================================
+\section{Methodology}
+\label{sec:methodology}
+\subsection{Feature Engineering}
+% List and briefly explain: temporal (hour, day one-hot), business (campaign, discount), traffic (past_traffic, lag_1..3, rolling mean/std). 16 features total.
+Replace with your text.
+
+\subsection{Model and Training}
+% Random Forest Regressor (200 trees, max\_depth=10). Train/test split 80/20. Metrics: MAE, RMSE. Baseline comparison. Use your own sentences.
+Replace with your text.
+
+\subsection{Scaling Logic}
+% Rule-based mapping: predicted traffic to replica count (1-5). Thresholds as in your README. Relation to HPA.
+Replace with your text.
+%==============================================================================
+
+%==============================================================================
+\section{Implementation}
+\label{sec:implementation}
+% Flask API (endpoints: /health, /predict); request/response format. Kubernetes deployment and HPA configuration. Autoscale script/simulation. Dashboard (optional). Write in your own words.
+Replace this with your implementation section.
+%==============================================================================
+
+%==============================================================================
+\section{Results}
+\label{sec:results}
+% Report your actual MAE and RMSE from training. Feature importance (top 3-5). Scaling behavior in simulation. Use numbers from your runs; write sentences yourself.
+Replace this with your results.
+%==============================================================================
+
+%==============================================================================
+\section{Discussion and Limitations}
+\label{sec:discussion}
+% Limitations: synthetic data only; single model; fixed thresholds. Future work: real data, retraining pipeline, richer metrics, load testing.
+Replace this with your discussion.
+%==============================================================================
+
+%==============================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+% 1 short paragraph: summarize problem, approach, and contribution. No new technical content.
+Replace this with your conclusion.
+%==============================================================================
+
+%==============================================================================
+% References - IEEE style: number in square brackets, then authors, title, journal/conference, vol, no, pages, year.
+% Add real references (papers, K8s docs, scikit-learn) and cite them in the text as [1], [2], etc.
+%==============================================================================
+\begin{thebibliography}{00}
+\bibitem{b1} Author(s), ``Title of the paper,'' \textit{Journal/Conference Name}, vol. X, no. Y, pp. XX--YY, Year.
+\bibitem{b2} Kubernetes, ``Horizontal Pod Autoscaler,'' \url{https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/}, accessed Mar. 2026.
+\bibitem{b3} Scikit-learn, ``Random Forest Regressor,'' \url{https://scikit-learn.org/stable/modules/ensemble.html\#forests}, accessed Mar. 2026.
+% Add more as you cite in the text.
+\end{thebibliography}
+
+\end{document}
